@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -15,7 +16,8 @@ class EventController extends Controller
     public function index()
     {
         // show published event
-        $events = Event::published()->latest()->paginate(10);
+        $user = User::findOrFail(auth()->user()->id);
+        $events = $user->events()->latest()->paginate(10);
         // return response()->json($events);
         return view('user.events.index', compact('events'));
     }
@@ -47,9 +49,12 @@ class EventController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $event = Event::where('slug', $slug)->firstOrFail();
+        $surveys = $event->surveys()->get()->loadCount('fields');
+        // return response()->json($surveys);
+        return view('user.events.show', compact('event', 'surveys'));
     }
 
     /**
@@ -84,5 +89,20 @@ class EventController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function join($slug)
+    {
+        $event = Event::where('slug', $slug)->firstOrFail();
+        // check if user already joined
+        if ($event->users()->where('user_id', auth()->id())->exists()) {
+            toastr()->error('You already joined this event');
+            return redirect()->back();
+        } else {
+            // $event->users()->attach(auth()->id());
+            toastr()->success('You joined this event successfully');
+            // redirect to event page
+        }
+        return redirect()->route('user.events.show', $event->slug);
     }
 }

@@ -63,7 +63,10 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="image">Gambar</label>
-                        <input type="file" class="dropify form-control" data-max-file-size="5M" data-default-file="" />
+                        <input type="file" name="image" class="form-control" />
+                        @error('image')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-md-8">

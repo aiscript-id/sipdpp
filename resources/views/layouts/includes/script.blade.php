@@ -29,7 +29,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 <script type="text/javascript">
  
-     $('.show_confirm').click(function(event) {
+    $('.show_confirm').click(function(event) {
         var form =  $(this).closest("form");
         var name = $(this).data("name");
         event.preventDefault();

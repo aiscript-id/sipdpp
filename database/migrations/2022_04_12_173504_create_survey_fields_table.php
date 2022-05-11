@@ -18,6 +18,7 @@ class CreateSurveyFieldsTable extends Migration
             $table->string('question');
             $table->foreignId('survey_id')->references('id')->on('surveys')->onDelete('cascade');
             $table->string('type');
+            $table->text('options')->nullable();
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@
                    <input type="text" class="form-control" id="question" placeholder="masukan pertanyaan survey" name="question" value="{{ @$field->question }}">
                 </div>
                 @php
-                    $type = ['text' , 'radio' , 'checkbox' , 'select' , 'number' , 'textarea'];
+                    $type = ['text' , 'select' , 'number' , 'textarea'];
                 @endphp
                 <div class="form-group">
                    <label for="type">Tipe</label>
@@ -32,12 +32,20 @@
                         @endforeach
                    </select>
                 </div>
-                <div class="text-right">
-                    <button class="btn btn-inverse-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </div>
+
+                {{-- show field option if type select --}}
+                  <div class="form-group" id="options">
+                        <label for="options">Pilihan </label>
+                        <textarea class="form-control" rows="4"  placeholder="" name="options">{{ @$field->options }}</textarea>
+                        <small>Masukan pilihan untuk tipe pertanyaan "select". Pisahkan pilihan dengan tanda koma (,)</small>
+                  </div>
+                  <div class="text-right">
+                     <button class="btn btn-inverse-secondary" data-dismiss="modal">Close</button>
+                     <button type="submit" class="btn btn-primary">Update</button>
+                  </div>
              </form>
           </div>
        </div>
     </div>
  </div>
+

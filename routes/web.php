@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WilayahController;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +64,11 @@ Route::middleware('role:user')->prefix('user')->group(function() {
 
     // event user
     Route::get('/events', [EventController::class, 'index'])->name('user.events');
+    Route::get('/events/{slug}/join', [EventController::class, 'join'])->name('user.events.join');
+    Route::get('/events/{slug}/show', [EventController::class, 'show'])->name('user.events.show');
+
+    // survey
+    Route::get('/events/{slug}/surveys/{slug_survey}', [SurveyController::class, 'joinSurvey'])->name('user.surveys.join');
 });
 
 

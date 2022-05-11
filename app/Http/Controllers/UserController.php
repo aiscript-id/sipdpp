@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,11 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user.dashboard');
+        // event not yet join
+        $user = User::find(Auth::id());
+        $join = $user->events()->pluck('event_id')->toArray();
+        $events = Event::with('users')->published()->whereNotIn('id', $join)->latest()->paginate(10);
+        return view('user.dashboard', compact('events'));
     }
 
     public function profile()

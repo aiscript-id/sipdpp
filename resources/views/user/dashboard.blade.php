@@ -39,5 +39,50 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12 mb-2">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-0">Event dan Pelatihan yang tersedia</h4>
+                </div>
+            </div>
+        </div>
+        @foreach ($events as $event)
+        <div class="col-md-12 mb-4">
+            {{-- image --}}
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ asset($event->image) }}" alt="{{ $event->name }}" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="card-title">{{ $event->name }}</h4>
+                            <p class="card-text">{{ $event->description }}</p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <i class="mdi mdi-calendar-clock"></i> {{ $event->date }}
+                                </small>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <i class="mdi mdi-clock"></i> {{ $event->start_time }} - {{ $event->end_time }}
+                                </small>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <i class="mdi mdi-map-marker"></i> {{ $event->location }}
+                                </small>
+                            </p>
+                            @if (Auth::user()->verified_at)
+                                <a href="{{ route('user.events.join', ['slug' => $event->slug]) }}" class="btn btn-primary">Ikuti Pelatihan</a>
+                            @else 
+                                <a href="#" class="btn btn-white">Lengkapi Profile</a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
     </div>
 @endsection

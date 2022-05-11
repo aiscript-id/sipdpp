@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\MyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Survey;
@@ -47,10 +48,17 @@ class EventController extends Controller
             'start_time' => 'required',
             'end_time' => 'required',
             'location' => 'required|string|max:255',
-            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
 
         $attr['slug'] = \Str::slug($attr['name']);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image_path = MyHelper::instance()->uploadImage($image, 'events');
+            $attr['image'] = $image_path;
+        }
+
         $event = Event::create($attr);
 
         toastr()->success('Event created successfully');
@@ -92,6 +100,7 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $event = Event::findOrFail($id);
         $attr = request()->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -99,10 +108,20 @@ class EventController extends Controller
             'start_time' => 'required',
             'end_time' => 'required',
             'location' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
 
         $attr['slug'] = \Str::slug($attr['name']);
-        $event = Event::findOrFail($id);
+
+        if ($request->hasFile('image')) {
+            if ($event->image) {
+                MyHelper::instance()->deleteImage($event->image);
+            }
+            $image = $request->file('image');
+            $image_path = MyHelper::instance()->uploadImage($image, 'events');
+            $attr['image'] = $image_path;
+        }
+
         $event->update($attr);
 
         toastr()->success('Event updated successfully');

@@ -19,6 +19,7 @@ class Event extends Model
         'end_time',
         'location',
         'publish',
+        'image'
     ];
 
     public function getGetDateAttribute()
@@ -44,11 +45,16 @@ class Event extends Model
     public function surveys()
     {
         return $this->belongsToMany(Survey::class);
-        # code...
     }
 
     public function scopePublished()
     {
         return $this->where('publish', 1);
+    }
+
+    public function scopeNotJoined($user)
+    {
+        $join = $user->events()->pluck('event_id')->toArray();
+        return $this->whereNotIn('id', $join);
     }
 }

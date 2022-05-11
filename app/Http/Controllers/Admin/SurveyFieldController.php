@@ -41,6 +41,7 @@ class SurveyFieldController extends Controller
             'question' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'survey_id' => 'required|integer',
+            'options' => 'nullable|string',
         ]);
 
         $survey_field = SurveyField::create($attr);
@@ -81,7 +82,18 @@ class SurveyFieldController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $attr = $request->validate([
+            'question' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'survey_id' => 'required|integer',
+            'options' => 'nullable|string',
+        ]);
+
+        $survey_field = SurveyField::findOrFail($id);
+        $survey_field->update($attr);
+
+        toastr()->success('Survey field updated successfully.');
+        return redirect()->route('surveys.fields', $survey_field->survey_id);
     }
 
     /**
