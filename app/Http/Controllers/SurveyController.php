@@ -34,7 +34,7 @@ class SurveyController extends Controller
         $fields = $survey->fields(function($query) use ($survey_user) {
             $query->answer($survey_user->id);
         })->get();
-        return response()->json($fields);
+        // return response()->json($fields);
         // return response()->json($survey_fields);
         return view('user.survey.join', compact('event', 'survey', 'fields', 'survey_user'));
     }

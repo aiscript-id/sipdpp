@@ -25,4 +25,15 @@ class Survey extends Model
     {
         return $query->where('surveys.publish', 1);
     }
+
+    public function survey_user()
+    {
+        return $this->hasManyThrough(
+            SurveyUser::class,
+            EventSurvey::class,
+            'survey_id',
+            'event_survey_id'
+
+        );
+    }
 }

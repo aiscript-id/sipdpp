@@ -62,13 +62,23 @@
                             <span class="badge badge-pill badge-outline-primary">{{ $survey->fields->count() }} Pertanyaan</span>
                         </div>
                     </div>
+                    @php
+                        $my_survey = $survey->survey_user->where('user_id', Auth::user()->id)->first();
+                    @endphp
+                    @if (!@$my_survey)
+                        
                     <a href="{{ route('user.surveys.join', ['slug' => $event->slug, 'slug_survey' => $survey->slug]) }}" class="btn btn-primary btn-sm">Lihat Survey</a>
+                    @else
+                    <p>Anda telah menyelesaikan survey ini</p>
+                    <a href="{{ route('user.surveys.join', ['slug' => $event->slug, 'slug_survey' => $survey->slug]) }}" class="btn btn-primary btn-sm">Lihat Jawaban</a>
+                    @endif
+                    
                 </div>
             </div>
             @empty
             <div class="card mb-2">
                 <div class="card-body">
-                    <p class=" mb-0">Mohon maaf, survey belum tersedia</p>
+                    <p class=" mb-0">Mohon maaf, survey belum tersedia </p>
                 </div>
             </div>
             @endforelse
