@@ -61,6 +61,11 @@ class User extends Authenticatable
         return $this->avatar ? asset($this->avatar) : 'https://ui-avatars.com/api/?background=4B49AC&color=fff&name=' . $this->name;;
     }
 
+    public function getGetGenderAttribute()
+    {
+        return $this->gender ? ( ($this->gender == 1) ? 'Pria' : 'Wanita' ) : '-';
+    }
+
     public function events()
     {
         return $this->belongsToMany(Event::class);

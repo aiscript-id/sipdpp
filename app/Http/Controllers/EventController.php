@@ -52,7 +52,7 @@ class EventController extends Controller
     public function show($slug)
     {
         $event = Event::where('slug', $slug)->firstOrFail();
-        $surveys = $event->surveys()->get()->loadCount('fields');
+        $surveys = $event->surveys()->published()->get()->loadCount('fields');
         // return response()->json($surveys);
         return view('user.events.show', compact('event', 'surveys'));
     }
@@ -99,7 +99,7 @@ class EventController extends Controller
             toastr()->error('You already joined this event');
             return redirect()->back();
         } else {
-            // $event->users()->attach(auth()->id());
+            $event->users()->attach(auth()->id());
             toastr()->success('You joined this event successfully');
             // redirect to event page
         }

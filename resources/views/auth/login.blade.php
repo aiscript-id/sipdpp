@@ -8,7 +8,7 @@
         <img src="{{ asset('assets/images/logo.png') }}" alt="logo">
         </div>
         <div class="text-center">
-            <h5>Selamat datang di Platform Balai Latihan Masyarakat Banjarmasin</h5>
+            <h5>Selamat datang di Platform Balai Teknologi Informasi dan Komunikasi Pendidikan</h5>
             <h6 class="font-weight-light">Silahkan masuk</h6>
         </div>
         <form method="POST" action="{{ route('login') }}">

@@ -20,4 +20,9 @@ class Survey extends Model
     {
         return $this->belongsToMany(Event::class);
     }
+
+    public function scopePublished($query)
+    {
+        return $query->where('surveys.publish', 1);
+    }
 }

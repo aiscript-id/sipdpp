@@ -33,7 +33,7 @@
                         <span>{{ $user->name }}</span>
                      </td>
                      <td>{{ $user->email }}</td>
-                     <td>{{ Str::title($user->gender ?? '-')  }}</td>
+                     <td>{{ $user->getGender  }}</td>
                      <td>{{ $user->institute ?? '-' }}</td>
                      <td>
                         <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-inverse-info">

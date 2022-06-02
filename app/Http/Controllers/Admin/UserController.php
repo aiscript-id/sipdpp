@@ -18,7 +18,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::role('user')->latest()->paginate(10);
-        return view('admin.users.index', compact('users', 'event'));
+        // $event = Event::latest()->first();
+        return view('admin.users.index', compact('users'));
     }
 
     /**

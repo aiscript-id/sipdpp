@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                     <h3 class="font-weight-bold">Event dan Pelatihan yang Anda Ikuti</h3>
-                    <h6 class="font-weight-normal mb-0">Sistem Informasi Pelatihan <span class="text-primary">Balai Pelatihan Masyarakat Kota Banjarmasin</span></h6>
+                    <h6 class="font-weight-normal mb-0">Sistem Informasi Pelatihan <span class="text-primary">Balai Teknologi Informasi dan Komunikasi Pendidikan</span></h6>
                 </div>
                 <div class="col-12 col-xl-4">
                 </div>
@@ -51,7 +51,7 @@
 
             {{-- card survey --}}
             <h4 class="card-title">Survey</h4>
-            @foreach ($surveys as $survey)
+            @forelse ($surveys as $survey)
             <div class="card mb-2">
                 <div class="card-body">
                     {{--  --}}
@@ -65,7 +65,13 @@
                     <a href="{{ route('user.surveys.join', ['slug' => $event->slug, 'slug_survey' => $survey->slug]) }}" class="btn btn-primary btn-sm">Lihat Survey</a>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p class=" mb-0">Mohon maaf, survey belum tersedia</p>
+                </div>
+            </div>
+            @endforelse
 
         </div>
     </div>

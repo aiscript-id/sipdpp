@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                     <h3 class="font-weight-bold">Welcome {{ Auth::user()->name }}</h3>
-                    <h6 class="font-weight-normal mb-0">Sistem Informasi Pelatihan <span class="text-primary">Balai Pelatihan Masyarakat Kota Banjarmasin</span></h6>
+                    <h6 class="font-weight-normal mb-0">Sistem Informasi Pelatihan <span class="text-primary">Balai Teknologi Informasi dan Komunikasi Pendidikan</span></h6>
                 </div>
                 <div class="col-12 col-xl-4">
                 </div>
@@ -21,7 +21,7 @@
                             <div class="col-md-10">
                                 <p class="p-0">
                                     {{-- end icon success --}}
-                                    <b class="text-success">Anda telah melengkapi data diri. </b><br> Silahkan mengikuti event dan survey yang telah disediakan di Balai Pelatihan Masyarakat Kota Banjarmasin
+                                    <b class="text-success">Anda telah melengkapi data diri. </b><br> Silahkan mengikuti event dan survey yang telah disediakan di Balai Teknologi Informasi dan Komunikasi Pendidikan
                                 </p>
                             </div>
                             <div class="col-md-2">
@@ -29,7 +29,7 @@
                             </div>
                         @else
                             <div class="col-md-10">
-                                <p class="p-0"><b class="text-warning">Anda belum melengkapi data diri.</b><br> Silahkan lakukan pengisian data diri untuk bergabung ke dalam Event di Balai Pelatihan Masyarakat Kota Banjarmasin</p>
+                                <p class="p-0"><b class="text-warning">Anda belum melengkapi data diri.</b><br> Silahkan lakukan pengisian data diri untuk bergabung ke dalam Event di Balai Teknologi Informasi dan Komunikasi Pendidikan</p>
                             </div>
                             <div class="col-md-2">
                                 <a href="{{ route('user.profile') }}" class="btn btn-primary btn-block">Isi Data Diri</a>
@@ -76,7 +76,7 @@
                             @if (Auth::user()->verified_at)
                                 <a href="{{ route('user.events.join', ['slug' => $event->slug]) }}" class="btn btn-primary">Ikuti Pelatihan</a>
                             @else 
-                                <a href="#" class="btn btn-white">Lengkapi Profile</a>
+                                <a href="#" class="btn btn-outline-primary">Lengkapi Profile</a>
                             @endif
                         </div>
                     </div>

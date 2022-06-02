@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                     <h3 class="font-weight-bold">Survey</h3>
-                    <h6 class="font-weight-normal mb-0">Sistem Informasi Pelatihan <span class="text-primary">Balai Pelatihan Masyarakat Kota Banjarmasin</span></h6>
+                    <h6 class="font-weight-normal mb-0">Sistem Informasi Pelatihan <span class="text-primary">Balai Teknologi Informasi dan Komunikasi Pendidikan</span></h6>
                 </div>
                 <div class="col-12 col-xl-4">
                 </div>
@@ -29,7 +29,7 @@
                 </div>
             </div>
 
-            <form action="{{ route('user.surveys.store', ) }}" method="post">
+            <form action="{{ route('user.surveys.store', ['survey_user' => $survey_user->id ] ) }}" method="post">
                 @csrf
                 @foreach ($survey->fields as $field)
                 <div class="card mb-3">
@@ -56,7 +56,7 @@
                 @endforeach
                 <div class="text-right">
                     {{-- back --}}
-                    <a href="{{ route('user.events.show', ['slug' => $event->slug]) }}" class="btn btn-secondary">Kembali</a>
+                    <a href="{{ route('user.events.show', ['slug' => $event->slug]) }}" class="btn btn-outline-secondary">Kembali</a>
                     {{-- submit --}}
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
