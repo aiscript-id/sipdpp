@@ -69,7 +69,7 @@ Route::middleware('role:user')->prefix('user')->group(function() {
 
     // survey
     Route::get('/events/{slug}/surveys/{slug_survey}', [SurveyController::class, 'joinSurvey'])->name('user.surveys.join');
-    Route::post('events/{survey_user}/store', [SurveyController::class, 'store'])->name('user.surveys.store');
+    Route::put('events/{survey_user}/update', [SurveyController::class, 'update'])->name('user.surveys.update');
 });
 
 

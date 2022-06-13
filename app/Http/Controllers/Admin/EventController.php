@@ -146,11 +146,10 @@ class EventController extends Controller
     public function survey($id)
     {
         $event = Event::findOrFail($id);
-        $surveys = $event->surveys()->latest()->get();
-        if ($surveys->isEmpty()) {
-            $surveys = Survey::latest()->get();
-        }
-        return view('admin.events.survey', compact('event', 'surveys'));
+        $surveys = $event->surveys()->with('survey_user.answers')->get();
+        return response()->json($surveys);
+        $all_surveys = Survey::latest()->get();
+        return view('admin.events.survey', compact('event', 'surveys', 'all_surveys'));
     }
 
     public function surveyStore(Request $request)

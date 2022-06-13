@@ -43,6 +43,12 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-0">Event dan Pelatihan yang tersedia</h4>
+                    @if ($events->count() == 0)
+                    <div class="text-center">
+                        <img src="{{ asset('assets/images/empty.svg') }}" class="img-fluid my-3" width="15%" alt="">
+                        <p>Belum ada pelatihan terbaru</p>
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -83,6 +89,7 @@
                 </div>
             </div>
         </div>
+            
         @endforeach
     </div>
 @endsection

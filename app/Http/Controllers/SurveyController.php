@@ -18,28 +18,41 @@ class SurveyController extends Controller
         $survey = Survey::where('slug', $slug_survey)->firstOrFail();
         $event_survey = EventSurvey::where('event_id', $event->id)->where('survey_id', $survey->id)->firstOrFail(); 
 
+        // dd($event_survey);
         // create new survey_user
         $survey_user = SurveyUser::where('event_survey_id', $event_survey->id)->where('user_id', auth()->user()->id)->first();
         if (!$survey_user) {
-            $data = [
-                'event_survey_id' => $event_survey->id,
-                'user_id' => auth()->user()->id,
-                'progress' => 0,
-            ];
-            $survey_user = SurveyUser::create($data);
+            $survey_user = $this->createAnswer($event_survey);
             toastr()->success('You have successfully joined the survey.');
         }
-        
 
-        $fields = $survey->fields(function($query) use ($survey_user) {
-            $query->answer($survey_user->id);
-        })->get();
-        // return response()->json($fields);
-        // return response()->json($survey_fields);
+        $fields = Answer::where('survey_user_id', $survey_user->id)->with('field')->get();
         return view('user.survey.join', compact('event', 'survey', 'fields', 'survey_user'));
     }
 
-    public function store(Request $request)
+    public function createAnswer($event_survey)
+    {
+        $data = [
+            'event_survey_id' => $event_survey->id,
+            'user_id' => auth()->user()->id,
+            'progress' => 0,
+        ];
+        $survey_user = SurveyUser::create($data);
+        // create null answer for each field
+        $survey_fields = SurveyField::where('survey_id', $event_survey->survey_id)->get();
+        foreach ($survey_fields as $survey_field) {
+            $data = [
+                'survey_user_id' => $survey_user->id,
+                'field_id' => $survey_field->id,
+                'answer' => null,
+            ];
+            Answer::create($data);
+        }
+
+        return $survey_user;
+    }
+
+    public function update(Request $request)
     {
         $survey_user = SurveyUser::findOrFail($request->survey_user);
         $survey_event = $survey_user->event_survey;

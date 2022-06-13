@@ -29,27 +29,26 @@
                 </div>
             </div>
 
-            <form action="{{ route('user.surveys.update', ['survey_user' => $survey_user->id ] ) }}" method="post">
+            <form action="{{ route('user.surveys.store', ['survey_user' => $survey_user->id ] ) }}" method="post">
                 @csrf
-                @method('PUT')
-                @foreach ($fields as $field)
+                @foreach ($survey->fields as $field)
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="form-group form-group-sm mb-0">
-                            <label for=""><b>{{ $loop->iteration }}. {{ $field->field->question }}</b></label>
-                            @if ($field->field->type == 'text')
-                                <input type="text" class="form-control" required name="{{ $field->field->id }}" value="{{ $field->answer }}" placeholder="Jawaban">
-                            @elseif ($field->field->type == 'textarea')
-                                <textarea class="form-control" required name="{{ $field->field->id }}" placeholder="Jawaban">{{ $field->answer }}</textarea>
-                            @elseif ($field->field->type == 'select')
-                                <select class="form-control" required name="{{ $field->field->id }}">
+                            <label for=""><b>{{ $loop->iteration }}. {{ $field->question }}</b></label>
+                            @if ($field->type == 'text')
+                                <input type="text" class="form-control" required name="{{ $field->id }}" placeholder="Jawaban">
+                            @elseif ($field->type == 'textarea')
+                                <textarea class="form-control" required name="{{ $field->id }}" placeholder="Jawaban"></textarea>
+                            @elseif ($field->type == 'select')
+                                <select class="form-control" required name="{{ $field->id }}">
                                     <option value="">Silahkan Pilih</option>
-                                    @foreach ($field->field->getOptions as $option)
-                                        <option value="{{ $option }}" {{ ($field->answer == $option) ? 'selected' : '' }}>{{ $option }}</option>
+                                    @foreach ($field->getOptions as $option)
+                                        <option value="{{ $option }}">{{ $option }}</option>
                                     @endforeach
                                 </select>
-                            @elseif ($field->field->type == 'number')
-                                <input type="number" class="form-control" min="1" max="10" required name="{{ $field->field->id }}" value="{{ $field->answer }}" placeholder="Jawaban">
+                            @elseif ($field->type == 'number')
+                                <input type="number" class="form-control" min="1" max="10" required name="{{ $field->id }}" placeholder="Jawaban">
                             @endif
                         </div>
                     </div>

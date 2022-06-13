@@ -10,4 +10,10 @@ class Answer extends Model
     use HasFactory;
     protected $table = 'answers';
     protected $fillable = ['survey_user_id', 'field_id', 'user_id', 'answer'];
+
+
+    public function field()
+    {
+        return $this->belongsTo(SurveyField::class, 'field_id', 'id');
+    }
 }
