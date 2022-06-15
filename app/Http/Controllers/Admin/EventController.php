@@ -6,6 +6,7 @@ use App\Helpers\MyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Survey;
+use App\Models\SurveyField;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -146,10 +147,32 @@ class EventController extends Controller
     public function survey($id)
     {
         $event = Event::findOrFail($id);
-        $surveys = $event->surveys()->with('survey_user.answers')->get();
-        return response()->json($surveys);
+        $surveys = $event->surveys;
+        // ->with('survey_user.answers')->get();
+        $survey_user = $surveys->load('survey_user');
+        // get all id survey_user
+        $survey_user_id = $survey_user->pluck('id')->toArray();
+        // return response()->json($survey_user);
         $all_surveys = Survey::latest()->get();
         return view('admin.events.survey', compact('event', 'surveys', 'all_surveys'));
+    }
+
+    // surveyField
+    public function surveyField($event, $field)
+    {
+        $event = Event::findOrFail($event);
+        $survey = $event->surveys->first();
+        $survey_user = $survey->survey_user;
+        $survey_user_id = $survey_user->pluck('id')->toArray();
+
+        // get answer by field
+        $field = SurveyField::findOrFail($field);
+        // GET ANSWER
+        $answers = $field->getAllAnswersAttribute($survey_user_id)->get();
+        // return response()->json($answers);
+
+        // $survey_user = $surveys->survey_user->load('answers');
+        return view('admin.surveys.answer', compact('event', 'survey', 'answers', 'field'));
     }
 
     public function surveyStore(Request $request)

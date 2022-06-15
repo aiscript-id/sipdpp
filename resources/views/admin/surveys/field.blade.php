@@ -57,6 +57,12 @@
                            <button type="button" class="btn btn-inverse-info btn-sm" data-toggle="modal" data-target="#modal-update-field{{ $field->id }}">
                               <i class="mdi mdi-pencil"></i>
                            </button>
+
+                           {{-- btn show --}}
+                           <a href="{{ route('surveys.fields.show', ['field' => $field->id, 'survey' => $survey->id]) }}" class="btn btn-inverse-primary btn-sm">
+                              <i class="mdi mdi-eye"></i>
+                           </a>
+
                            {{-- modal --}}
                            <x-modal-survey-field :field="$field" :survey="$survey" />
                            <form action="{{ route('fields.destroy', $field->id) }}" method="POST" class="d-inline show_confirm">

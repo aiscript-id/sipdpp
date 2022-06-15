@@ -39,6 +39,7 @@
       </div>
    </div>
 
+
    @foreach ($event->surveys as $survey)    
    <div class="card mt-2">
         <div class="card-body">
@@ -59,6 +60,8 @@
             <div class="d-flex justify-content-between">
                 <p class="card-description">
                     Dikerjakan oleh: {{ $survey->survey_user->count() ?? 0 }} orang
+                    <br>
+                    <small>Klik pertanyaan untuk melihat jawaban</small>
                 </p>
             </div>
 
@@ -66,7 +69,14 @@
             @foreach ($survey->fields as $field)
 
             <div class="mb-3">
-                <p class="">{{ $field->question }}</p>
+                {{-- badge --}}
+                <a href="{{ route('events.surveys.fields', ['field' => $field->id, 'event' => $event->id]) }}" class="text-decoration-none">
+                    <div class="alert alert-primary">
+                        <i class="mdi mdi-eye text-sm"></i>
+                        {{ $field->question }}
+                    </div>
+                </a>
+                {{-- <p class="">{{ $field->question }}</p> --}}
                 {{-- list all answer --}}
                 {{--  --}}
 

@@ -43,9 +43,15 @@ Route::middleware('role:superadmin|admin')->prefix('admin')->group(function() {
     Route::post('events/survey/store', [AdminEventController::class, 'surveyStore'])->name('events.surveys.store');
     Route::delete('events/survey/destroy', [AdminEventController::class, 'surveyDestroy'])->name('events.surveys.destroy');
 
+    // events.surveys.fields.show
+    Route::get('events/{event}/survey/field/{field}', [AdminEventController::class, 'surveyField'])->name('events.surveys.fields');
+
     Route::resource('surveys', AdminSurveyController::class);
     // route group survey
     Route::get('surveys/{survey}/fields', [AdminSurveyController::class, 'fields'])->name('surveys.fields');
+    // show
+    Route::get('surveys/{survey}/fields/{field}', [AdminSurveyController::class, 'field'])->name('surveys.fields.show');
+
 
     // publish
     Route::put('publish', [AdminController::class, 'publish'])->name('admin.publish');

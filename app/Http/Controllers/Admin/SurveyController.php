@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Survey;
+use App\Models\SurveyField;
 use Illuminate\Http\Request;
 
 class SurveyController extends Controller
@@ -120,4 +121,17 @@ class SurveyController extends Controller
         $fields = $survey->fields;
         return view('admin.surveys.field', compact('survey', 'fields'));
     }
+
+    // field
+    public function field($id)
+    {
+        $field = SurveyField::findOrFail($id);
+        $survey = $field->survey;
+        // return response()->json($survey);
+        $answers = $field->filledAnswers()->get();
+        $most_common_answer = $field->mostAnswer;
+        return view('admin.surveys.answer', compact('field', 'answers', 'most_common_answer', 'survey'));
+        # code...
+    }
+    
 }

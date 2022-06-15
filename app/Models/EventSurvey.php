@@ -17,4 +17,15 @@ class EventSurvey extends Model
         return $this->belongsTo(Event::class, 'event_id', 'id');
     }
 
+    // survey_user
+    public function survey_user()
+    {
+        return $this->hasManyThrough(
+            SurveyUser::class,
+            EventSurvey::class,
+            'survey_id',
+            'event_survey_id'
+        );
+    }
+
 }
