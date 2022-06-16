@@ -50,7 +50,8 @@
             </div>
 
             {{-- card survey --}}
-            <h4 class="card-title">Survey</h4>
+            {{-- <h4 class="card-title">Survey</h4> --}}
+            @if ($event->date >= date('Y-m-d') && $event->end_time >= date('H:i:s'))
             @forelse ($surveys as $survey)
             <div class="card mb-2">
                 <div class="card-body">
@@ -82,6 +83,13 @@
                 </div>
             </div>
             @endforelse
+            @else
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p class=" mb-0">Mohon maaf, survey belum tersedia </p>
+                </div>
+            </div>
+            @endif
 
         </div>
     </div>
