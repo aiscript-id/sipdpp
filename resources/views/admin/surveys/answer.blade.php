@@ -152,7 +152,13 @@
    @endpush
    @endif
 
+   {{-- rate 2 digit --}}
+  
+
    @if (@$rate_answers)
+   @php
+      $rate_answers = round($rate_answers, 2);
+    @endphp
     @push('scripts')
     <script>
       if ($("#rate-chart").length) {
