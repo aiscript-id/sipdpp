@@ -51,7 +51,7 @@
 
             {{-- card survey --}}
             {{-- <h4 class="card-title">Survey</h4> --}}
-            @if ($event->date .' '. $event->end_time  <= date('Y-m-d H:i:s'))
+            @if ($event->date .' '. $event->end_time  >= date('Y-m-d H:i:s'))
             @forelse ($surveys as $survey)
             <div class="card mb-2">
                 <div class="card-body">
