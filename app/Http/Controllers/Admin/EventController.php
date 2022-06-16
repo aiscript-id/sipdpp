@@ -171,8 +171,27 @@ class EventController extends Controller
         $answers = $field->getAllAnswersAttribute($survey_user_id)->get();
         // return response()->json($answers);
 
+        $most_common_answer = $field->mostAnswer;;
+        // return response()->json($field);
+
+        $select_answers = null;
+        if ($field->type == "select") {
+            $options = $field->getOptions;
+            foreach ($options as $key => $value) {
+                $select_answers[$key] =  $field->getAllAnswersAttribute($survey_user_id)->where('answer','like', $value.'%')->count();
+            }
+            // return response()->json($select_answers);
+        }
+
+        // rate chart
+        $rate_answers = null;
+        if ($field->type == "number") {
+            $rate_answers = $answers->avg('answer');
+            // return response()->json($rate_answers);
+        }
+
         // $survey_user = $surveys->survey_user->load('answers');
-        return view('admin.surveys.answer', compact('event', 'survey', 'answers', 'field'));
+        return view('admin.surveys.answer', compact('event', 'survey', 'answers', 'field', 'select_answers', 'rate_answers'));
     }
 
     public function surveyStore(Request $request)

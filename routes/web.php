@@ -50,7 +50,7 @@ Route::middleware('role:superadmin|admin')->prefix('admin')->group(function() {
     // route group survey
     Route::get('surveys/{survey}/fields', [AdminSurveyController::class, 'fields'])->name('surveys.fields');
     // show
-    Route::get('surveys/{survey}/fields/{field}', [AdminSurveyController::class, 'field'])->name('surveys.fields.show');
+    Route::get('surveys/fields/{field}', [AdminSurveyController::class, 'field'])->name('surveys.fields.show');
 
 
     // publish

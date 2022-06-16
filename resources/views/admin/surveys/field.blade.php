@@ -59,7 +59,7 @@
                            </button>
 
                            {{-- btn show --}}
-                           <a href="{{ route('surveys.fields.show', ['field' => $field->id, 'survey' => $survey->id]) }}" class="btn btn-inverse-primary btn-sm">
+                           <a href="{{ route('surveys.fields.show', ['field' => $field->id]) }}" class="btn btn-inverse-primary btn-sm">
                               <i class="mdi mdi-eye"></i>
                            </a>
 

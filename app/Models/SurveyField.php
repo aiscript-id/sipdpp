@@ -62,5 +62,4 @@ class SurveyField extends Model
         return $this->belongsTo(Survey::class);
     }
 
-
 }

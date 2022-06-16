@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Event;
 use App\Models\Survey;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,18 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        // pluck event name
+        $events = Event::select('id','name')->withCount('users')->get();
+        // pluck events name
+        $event_name = $events->pluck('name');
+        // pluck user_count
+        $user_count = $events->pluck('users_count');
+        $data = [
+            'event_name' => $event_name,
+            'user_count' => $user_count,
+        ];
+
+        return view('admin.dashboard', compact('data'));
     }
 
     public function publish(Request $request)

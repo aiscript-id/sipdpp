@@ -123,15 +123,32 @@ class SurveyController extends Controller
     }
 
     // field
-    public function field($id)
+    public function field($field)
     {
-        $field = SurveyField::findOrFail($id);
+        $field = SurveyField::findOrFail($field);
+
         $survey = $field->survey;
-        // return response()->json($survey);
         $answers = $field->filledAnswers()->get();
-        $most_common_answer = $field->mostAnswer;
-        return view('admin.surveys.answer', compact('field', 'answers', 'most_common_answer', 'survey'));
-        # code...
+        $most_common_answer = $field->mostAnswer;;
+        // return response()->json($field);
+
+        $select_answers = null;
+        if ($field->type == "select") {
+            $options = $field->getOptions;
+            foreach ($options as $key => $value) {
+                $select_answers[$key] =  $field->answers()->where('answer','like', $value.'%')->count();
+            }
+            // return response()->json($select_answers);
+        }
+
+        // rate chart
+        $rate_answers = null;
+        if ($field->type == "number") {
+            $rate_answers = $field->answers->avg('answer');
+            // return response()->json($rate_answers);
+        }
+
+        return view('admin.surveys.answer', compact('field', 'answers', 'most_common_answer', 'survey', 'select_answers', 'rate_answers'));
     }
     
 }

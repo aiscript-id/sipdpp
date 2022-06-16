@@ -9,7 +9,7 @@
 
 <!-- End plugin js for this page -->
 <!-- inject:js -->
-<script src="{{ asset('skydash/js/off-canvas.js') }}"></script>
+{{-- <script src="{{ asset('skydash/js/off-canvas.js') }}"></script> --}}
 <script src="{{ asset('skydash/js/hoverable-collapse.js') }}"></script>
 <script src="{{ asset('skydash/js/template.js') }}"></script>
 <script src="{{ asset('skydash/js/settings.js') }}"></script>

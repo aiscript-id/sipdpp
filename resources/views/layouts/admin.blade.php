@@ -16,7 +16,7 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
-          <li class="nav-item {{ Request::routeIs('admin') ? 'active' : '' }}">
+          <li class="nav-item {{ (Request::routeIs('admin')) ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('admin') }}">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
