@@ -44,8 +44,8 @@
                         </a>
                      </td>
                      <td>{{ $survey->fields_count ?? 0 }}</td>
-                     <td>{{ $survey->used_by_count ?? 0 }}</td>
-                     <td>{{ $survey->filled_by_count ?? 0 }}</td>
+                     <td>{{ $survey->event_survey->count() ?? 0 }}</td>
+                     <td>{{ $survey->survey_user_event->count() ?? 0 }}</td>
                      <td>
                         {{-- question field --}}
                         <a href="{{ route('surveys.fields', $survey->id) }}" class="btn btn-inverse-warning btn-sm">

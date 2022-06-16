@@ -34,6 +34,12 @@
               <span class="menu-title">Event</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" >
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Sertifikat</span>
+            </a>
+          </li>
           <li class="nav-item {{ Request::routeIs('surveys.*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('surveys.index') }}" >
               <i class="icon-paper menu-icon"></i>

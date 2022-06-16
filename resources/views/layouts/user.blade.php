@@ -21,20 +21,27 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item {{ Request::routeIs('user.events.*') ? 'active' : '' }}">
+          <li class="nav-item {{ request()->routeIs('user.events*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('user.events') }}" >
               <i class="icon-bell menu-icon"></i>
               <span class="menu-title">Event</span>
             </a>
           </li>
-          <li class="nav-item {{ Request::routeIs('user.surveys.*') ? 'active' : '' }}">
+          <li class="nav-item {{ Request::routeIs('user.surveys*') ? 'active' : '' }}">
             <a class="nav-link" href="#" >
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Survey</span>
             </a>
           </li>
 
-          <li class="nav-item {{ Request::routeIs('profile') ? 'active' : '' }}">
+          <li class="nav-item ">
+            <a class="nav-link" href="#" >
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Sertifikat</span>
+            </a>
+          </li>
+
+          <li class="nav-item {{ Request::routeIs('user.profile') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('user.profile') }}" >
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Profile</span>

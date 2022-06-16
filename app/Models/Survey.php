@@ -36,4 +36,22 @@ class Survey extends Model
 
         );
     }
+
+    // used_by event
+    public function event_survey()
+    {
+        return $this->hasMany(EventSurvey::class);
+    }
+
+    // survey user from event survey
+    public function survey_user_event()
+    {
+        return $this->hasManyThrough(
+            SurveyUser::class,
+            EventSurvey::class,
+            'survey_id',
+            'event_survey_id'
+        );
+    }
+
 }

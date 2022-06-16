@@ -4,12 +4,21 @@
       <div class="card-body">
          <div class="d-flex justify-content-between">
             <h4 class="card-title">Tabel Event</h4>
-            <a href="{{ route('events.create') }}">
-               <button class="btn btn-inverse-primary btn-sm">
-                  <i class="mdi mdi-plus"></i>
-                  Tambah
-               </button>
-            </a>
+            <div>
+               <a href="{{ route('events.create') }}">
+                  <button class="btn btn-inverse-primary btn-sm">
+                     <i class="mdi mdi-plus"></i>
+                     Tambah
+                  </button>
+               </a>
+               {{-- button cetak --}}
+               <a href="#">
+                  <button class="btn btn-inverse-primary btn-sm">
+                     <i class="mdi mdi-printer"></i>
+                     Cetak
+                  </button>
+               </a>
+            </div>
          </div>
          <p class="card-description">
             {{-- Add class <code>.table-striped</code> --}}

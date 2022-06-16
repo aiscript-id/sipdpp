@@ -41,7 +41,7 @@
                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Konfirmasi Password">
             </div>
             <div class="text-center mt-2 font-weight-light">
-                <button type="submit" class="btn btn-primary btn-block">
+                <button type="submit" class="btn btn-success btn-block">
                     {{ __('Register') }}
                 </button>
             </div>

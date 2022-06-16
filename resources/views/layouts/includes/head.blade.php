@@ -21,5 +21,17 @@
     <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}" />
 
     {{-- toastr --}}
+    <style>
+        .sidebar .nav .nav-item.active > .nav-link {
+            background: #46c35f!important;
+            position: relative;
+        }
+
+        /* hover sidebar nav item */
+        .sidebar .nav .nav-item:hover > .nav-link {
+            background: #46c35f!important;
+            position: relative;
+        }
+    </style>
     @toastr_css
 </head>
