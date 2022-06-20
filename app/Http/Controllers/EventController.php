@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Sesi;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -105,5 +106,23 @@ class EventController extends Controller
             // redirect to event page
         }
         return redirect()->route('user.events.show', $event->slug);
+    }
+
+    public function storeTugas(Request $request)
+    {
+        $sesi = Sesi::findOrFail($request->sesi_id);
+        $nilai = $sesi->nilai()->where('user_id', auth()->id())->first();
+        if ($nilai) {
+            $nilai->update([
+                'test' => $request->test,
+            ]);
+        } else {
+            $sesi->nilai()->create([
+                'user_id' => auth()->id(),
+                'test' => $request->test
+            ]);
+        }
+        toastr()->success('Your test has been submitted');
+        return redirect()->back();
     }
 }

@@ -41,8 +41,8 @@
               <span class="menu-title">Event</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" >
+          <li class="nav-item {{ Request::routeIs('certificates.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('certificates.index') }}" >
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Sertifikat</span>
             </a>

@@ -55,7 +55,7 @@
             {{-- card sesi --}}
 
             @forelse ($sesis as $sesi)
-            <div class="card card-{{ ($sesi->type == 'tugas') ? 'light-danger' : 'tale' }} mb-4">
+            <div class="card card-{{ ($sesi->type == 'tugas') ? 'dark-blue' : 'tale' }} mb-4">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
@@ -83,19 +83,26 @@
                             </div>
                             @if ($sesi->type == 'tugas')
 
-                            {{ $sesi->nilai->myTugas }}
-                            @if (@$sesi->myTugas)
-                                test
+                            {{-- {{ $sesi->nilai }} --}}
+                            @if (@$sesi->myTugas())
+                            {{-- alert --}}
+                            <div class="badge bsdge-md badge-success mb-2 font-weight-semibold " role="alert">
+                                <strong>Selamat!</strong> Anda telah menyelesaikan tugas ini.
+                            </div>
+                            <br>
+                            <a href="{{ $sesi->myTugas()->test }}" target="_blank"  class="mb-4 btn btn-info btn-sm">Lihat Jawaban</a>
+
                             @endif
+
                             {{-- input tugas form --}}
                             <form action="{{ route('user.tugas.store', ['sesi_id' => $sesi->id]) }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label>Kirim Jawaban Tugas</label>
                                     <div class="input-group col-xs-12">
-                                      <input type="text" class="form-control form-control-sm"  placeholder="Input link tugas disini">
+                                      <input type="text" class="form-control form-control-sm" name="test"  placeholder="Input link tugas disini">
                                       <span class="input-group-append">
-                                        <button class="btn-sm btn btn-primary" type="button">Upload</button>
+                                        <button class="btn-sm btn btn-primary" type="submit">Upload</button>
                                       </span>
                                     </div>
                                 </div>

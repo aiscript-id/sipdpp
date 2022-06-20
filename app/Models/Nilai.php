@@ -10,4 +10,14 @@ class Nilai extends Model
     use HasFactory;
     protected $table = 'nilai';
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function sesi()
+    {
+        return $this->belongsTo(Sesi::class);
+    }
 }

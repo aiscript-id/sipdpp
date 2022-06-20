@@ -47,12 +47,13 @@ class Sesi extends Model
 
     public function nilai()
     {
-        return $this->hasMany(Nilai::class);
+        return $this->hasMany(Nilai::class, 'sesi_id', 'id');
     }
 
-    public function myTugas()
+    public function MyTugas()
     {
-        $tugas = $this->nilai()->where('sesi_id', $this->id)->where('user_id', auth()->user()->id);
-        return $tugas;
+        $tugas = $this->nilai()->where('user_id', auth()->user()->id);
+        return $tugas->count() == 0 ? null : $tugas->first();
+        // return $tugas;
     }
 }

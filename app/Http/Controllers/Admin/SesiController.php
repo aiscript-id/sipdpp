@@ -144,4 +144,17 @@ class SesiController extends Controller
         $nilais = Nilai::where('sesi_id', $id)->paginate(10);
         return view('admin.events.sesi.nilai', compact('sesi', 'nilais', 'event'));
     }
+
+    public function nilaiUpdate(Request $request)
+    {
+        $nilai = Nilai::findOrFail($request->nilai_id);
+        $data = $request->validate([
+            'nilai' => 'required',
+        ]);
+
+        $nilai->update($data);
+
+        toastr()->success('Nilai updated successfully.');
+        return redirect()->route('events.tugas.nilai', $nilai->sesi->id);
+    }
 }

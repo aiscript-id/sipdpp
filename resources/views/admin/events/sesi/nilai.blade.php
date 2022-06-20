@@ -35,8 +35,12 @@
                         {{ $nilai->user->name }}
                      </td>
                      <td>{{ $nilai->test }}</td>
-                     <td>{{ $nilai->nilai }}</td>
+                     <td>{{ $nilai->nilai ?? 0 }}</td>
                      <td>
+                        {{-- modal edit --}}
+                        <button type="button" class="btn btn-inverse-primary btn-sm" data-toggle="modal" data-target="#editModal{{ $nilai->id }}">
+                           <i class="mdi mdi-pencil"></i>
+                        </button>
 
                      </td>
                   </tr>
@@ -51,6 +55,38 @@
          {{ $nilais->links() }}
       </div>
    </div>
+
+   {{-- modal edit --}}
+   @foreach ($nilais as $nilai)
+   <div class="modal fade" id="editModal{{ $nilai->id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="editModalLabel">Edit Nilai</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form action="{{ route('events.nilai.update', ['nilai_id' => $nilai->id]) }}" method="POST">
+               @csrf
+               @method('PUT')
+               <div class="modal-body">
+                  <div class="form-group">
+                     <label for="nilai">Nilai</label>
+                     <input type="number" class="form-control" id="nilai" name="nilai" max="100" min="0" value="{{ $nilai->nilai }}">
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+   @endforeach
+
+
    @section('script')    
    <script>
    </script>

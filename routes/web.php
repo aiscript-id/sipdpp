@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SurveyController as AdminSurveyController;
 use App\Http\Controllers\Admin\SurveyFieldController as AdminSurveyFieldController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SurveyController;
@@ -70,8 +71,11 @@ Route::middleware('role:superadmin|admin')->prefix('admin')->group(function() {
     Route::delete('events/sesi/destroy/{id}', [AdminSesiController::class, 'destroy'])->name('events.sesi.destroy');
 
     Route::get('events/tugas/{sesi}', [AdminSesiController::class, 'nilai'])->name('events.tugas.nilai');
+    Route::put('nilaiUpdate', [AdminSesiController::class, 'nilaiUpdate'])->name('events.nilai.update');
 
     Route::resource('mentors', MentorController::class)->only(['index', 'store', 'update', 'destroy']);
+
+    Route::resource('certificates', CertificateController::class)->only(['index', 'store', 'update', 'destroy']);
 
     // survey change
     Route::get('survey/insert-field', [AdminSurveyController::class, 'insertField']);
