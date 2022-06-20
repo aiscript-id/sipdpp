@@ -28,6 +28,13 @@
               <span class="menu-title">User</span>
             </a>
           </li>
+          {{-- mentor --}}
+          <li class="nav-item {{ Request::routeIs('mentors.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('mentors.index') }}" >
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Mentor</span>
+            </a>
+          </li>
           <li class="nav-item {{ Request::routeIs('events.*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('events.index') }}" >
               <i class="icon-bell menu-icon"></i>

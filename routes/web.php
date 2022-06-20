@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\Admin\MentorController;
+use App\Http\Controllers\Admin\SesiController as AdminSesiController;
 use App\Http\Controllers\Admin\SurveyController as AdminSurveyController;
 use App\Http\Controllers\Admin\SurveyFieldController as AdminSurveyFieldController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -43,6 +45,8 @@ Route::middleware('role:superadmin|admin')->prefix('admin')->group(function() {
     Route::post('events/survey/store', [AdminEventController::class, 'surveyStore'])->name('events.surveys.store');
     Route::delete('events/survey/destroy', [AdminEventController::class, 'surveyDestroy'])->name('events.surveys.destroy');
 
+    Route::get('events/{event}/peserta', [AdminEventController::class, 'peserta'])->name('events.peserta');
+
     // events.surveys.fields.show
     Route::get('events/{event}/survey/field/{field}', [AdminEventController::class, 'surveyField'])->name('events.surveys.fields');
 
@@ -57,6 +61,20 @@ Route::middleware('role:superadmin|admin')->prefix('admin')->group(function() {
     Route::put('publish', [AdminController::class, 'publish'])->name('admin.publish');
 
     Route::resource('fields', AdminSurveyFieldController::class)->only(['store', 'update', 'destroy']);
+
+    // sesi event
+    Route::get('events/{event}/create-sesi', [AdminSesiController::class, 'create'])->name('events.sesi.create');
+    Route::get('events/{event}/update-sesi/{sesi}', [AdminSesiController::class, 'edit'])->name('events.sesi.edit');
+    Route::post('events/sesi/store', [AdminSesiController::class, 'store'])->name('events.sesi.store');
+    Route::put('events/sesi/update', [AdminSesiController::class, 'update'])->name('events.sesi.update');
+    Route::delete('events/sesi/destroy/{id}', [AdminSesiController::class, 'destroy'])->name('events.sesi.destroy');
+
+    Route::get('events/tugas/{sesi}', [AdminSesiController::class, 'nilai'])->name('events.tugas.nilai');
+
+    Route::resource('mentors', MentorController::class)->only(['index', 'store', 'update', 'destroy']);
+
+    // survey change
+    Route::get('survey/insert-field', [AdminSurveyController::class, 'insertField']);
 });
 
 Route::middleware('role:user')->prefix('user')->group(function() {
@@ -76,6 +94,8 @@ Route::middleware('role:user')->prefix('user')->group(function() {
     // survey
     Route::get('/events/{slug}/surveys/{slug_survey}', [SurveyController::class, 'joinSurvey'])->name('user.surveys.join');
     Route::put('events/{survey_user}/update', [SurveyController::class, 'update'])->name('user.surveys.update');
+
+    Route::post('/events/tugas/store', [EventController::class, 'storeTugas'])->name('user.tugas.store');
 });
 
 

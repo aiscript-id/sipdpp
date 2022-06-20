@@ -1,5 +1,5 @@
-@extends('layouts.admin')
-@section('content')
+@extends('admin.events.head')
+@section('sub-content')
    <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between">

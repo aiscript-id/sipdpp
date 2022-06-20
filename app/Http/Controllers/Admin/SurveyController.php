@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Survey;
 use App\Models\SurveyField;
+use App\Models\SurveyUser;
 use Illuminate\Http\Request;
 
 class SurveyController extends Controller
@@ -149,6 +150,28 @@ class SurveyController extends Controller
         }
 
         return view('admin.surveys.answer', compact('field', 'answers', 'most_common_answer', 'survey', 'select_answers', 'rate_answers'));
+    }
+
+    public function insertField()
+    {
+        $survey_users = SurveyUser::all();
+        // dd($survey_users);
+
+        $x = 0;
+        foreach ($survey_users as $su) {
+            $event_survey = $su->event_survey;
+            // dd($event_survey);
+            if ($event_survey) {
+                $su->update([
+                    'event_id' => $event_survey->event_id,
+                    'survey_id' => $event_survey->survey_id,
+                ]);
+                $x++;
+            }
+        }
+
+        $result = 'Berhasil mengubah '.$x.' data';
+        return response()->json($result);
     }
     
 }

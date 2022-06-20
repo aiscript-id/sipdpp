@@ -53,8 +53,9 @@ class EventController extends Controller
     {
         $event = Event::where('slug', $slug)->firstOrFail();
         $surveys = $event->surveys()->published()->get()->loadCount('fields');
+        $sesis = $event->sesi;
         // return response()->json($surveys);
-        return view('user.events.show', compact('event', 'surveys'));
+        return view('user.events.show', compact('event', 'surveys', 'sesis'));
     }
 
     /**

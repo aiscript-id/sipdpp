@@ -58,7 +58,7 @@ class User extends Authenticatable
 
     public function getGetAvatarAttribute()
     {
-        return $this->avatar ? asset($this->avatar) : 'https://ui-avatars.com/api/?background=46c35f&color=fff&name=' . $this->name;;
+        return $this->avatar ? asset($this->avatar) : 'https://ui-avatars.com/api/?background=46c35f&color=fff&name=' . $this->name;
     }
 
     public function getGetGenderAttribute()

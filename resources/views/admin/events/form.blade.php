@@ -15,7 +15,7 @@
             @endif
             @csrf
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="name">Nama Event</label>
                         <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="Nama Event" value="{{ $event->name ?? old('name') }}" required>
@@ -26,9 +26,27 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="date">Tanggal</label>
+                        <label for="location">Lokasi</label>
+                        <input type="text" class="form-control form-control-sm" id="location" name="location" placeholder="Lokasi Event" value="{{ $event->location ?? old('location') }}" required>
+                        @error('location')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="date">Tanggal Awal</label>
                         <input type="date" class="form-control form-control-sm" id="date" name="date" placeholder="Tanggal" value="{{ $event->date ?? old('date') }}" required>
                         @error('date')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="date">Tanggal Berakhir</label>
+                        <input type="date" class="form-control form-control-sm" id="date" name="end_date" placeholder="Tanggal Berakhir" value="{{ $event->end_date ?? old('end_date') }}" required>
+                        @error('end_date')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
@@ -51,15 +69,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="location">Lokasi</label>
-                        <input type="text" class="form-control form-control-sm" id="location" name="location" placeholder="Lokasi Event" value="{{ $event->location ?? old('location') }}" required>
-                        @error('location')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                </div>
+                
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="image">Gambar</label>
@@ -69,10 +79,10 @@
                         @enderror
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="description">Deskripsi</label>
-                        <textarea name="description" class=" form-control form-control-sm" id="" cols="30" rows="5">{{ $event->description ?? old('description') }}</textarea>
+                        <textarea name="description" class=" form-control form-control-sm" id="" cols="30" rows="4">{{ $event->description ?? old('description') }}</textarea>
                         @error('description')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror

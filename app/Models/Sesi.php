@@ -6,21 +6,11 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Sesi extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'name',
-        'slug',
-        'description',
-        'date',
-        'start_time',
-        'end_time',
-        'location',
-        'publish',
-        'image'
-    ];
+    protected $table = 'sesi';
+    protected $guarded = [];
 
     public function getGetDateAttribute()
     {
@@ -37,29 +27,32 @@ class Event extends Model
         return $start . ' - ' . $end;
     }
 
-    public function users()
+    public function mentor()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(Mentor::class);
     }
 
-    public function surveys()
+    public function event()
     {
-        return $this->belongsToMany(Survey::class);
+        return $this->belongsTo(Event::class);
     }
 
-    public function scopePublished()
+    public function getColorTypeAttribute()
     {
-        return $this->where('publish', 1);
+        $color = ['primary', 'warning', 'danger'];
+        $type = ['materi', 'video', 'tugas'];
+        $index = array_search($this->type, $type);
+        return $color[$index];
     }
 
-    public function scopeNotJoined($user)
+    public function nilai()
     {
-        $join = $user->events()->pluck('event_id')->toArray();
-        return $this->whereNotIn('id', $join);
+        return $this->hasMany(Nilai::class);
     }
 
-    public function sesi()
+    public function myTugas()
     {
-        return $this->hasMany(Sesi::class);
+        $tugas = $this->nilai()->where('sesi_id', $this->id)->where('user_id', auth()->user()->id);
+        return $tugas;
     }
 }

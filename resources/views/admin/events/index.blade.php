@@ -57,7 +57,10 @@
                      <td>{{ $event->location ?? '-' }}</td>
                      <td>
                         {{-- peserta --}}
-                        <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-inverse-warning" title="Detail">
+                        <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-inverse-success" title="Sesi">
+                           <i class="mdi mdi-bulletin-board"></i>
+                        </a>
+                        <a href="{{ route('events.peserta', $event->id) }}" class="btn btn-sm btn-inverse-warning" title="Peserta">
                            <i class="mdi mdi-account"></i>
                         </a>
                         <a href="{{ route('events.surveys', $event->id) }}" class="btn btn-sm btn-inverse-primary" title="Survey">

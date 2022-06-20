@@ -34,6 +34,8 @@ class SurveyController extends Controller
     {
         $data = [
             'event_survey_id' => $event_survey->id,
+            'survey_id' => $event_survey->survey_id,
+            'event_id' => $event_survey->event_id,
             'user_id' => auth()->user()->id,
             'progress' => 0,
         ];

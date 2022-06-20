@@ -13,34 +13,35 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-lg-6 mb-md-4">
             <div class="card">
                 <div class="card-body">
                     <img src="{{ asset($event->image) }}" alt="{{ $event->name }}" class="img-fluid w-100 mb-3 rounded">
-                    <p class="card-text">
-                        <small class="text-muted">
-                            <i class="mdi mdi-calendar-clock"></i> {{ $event->date }}
-                        </small>
-                    </p>
-                    <p class="card-text">
-                        <small class="text-muted">
-                            <i class="mdi mdi-clock"></i> {{ $event->start_time }} - {{ $event->end_time }}
-                        </small>
-                    </p>
-                    <p class="card-text">
-                        <small class="text-muted">
-                            <i class="mdi mdi-map-marker"></i> {{ $event->location }}
-                        </small>
-                    </p>
+                    <div class="row">
+                        <div class="col-4">
+                            <p class="card-text">
+                                <i class="mdi mdi-calendar-clock"></i> {{ $event->date }}
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <p class="card-text">
+                                <i class="mdi mdi-clock"></i> {{ $event->start_time }} - {{ $event->end_time }}  
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <p class="card-text">
+                                <i class="mdi mdi-map-marker"></i> {{ $event->location }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-8 mb-4">
+
             {{-- image --}}
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <h4 class="card-title">{{ $event->name }}</h4>
                             <p class="card-text">{{ $event->description }}</p>
                             
@@ -48,10 +49,104 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-lg-6 mb-4">
+
+            {{-- card sesi --}}
+
+            @forelse ($sesis as $sesi)
+            <div class="card card-{{ ($sesi->type == 'tugas') ? 'light-danger' : 'tale' }} mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="card-title mb-3 text-white">{{ $sesi->name }}</p>
+                            {{-- mentor --}}
+                            <div class="d-flex MB-2">
+                                <img src="{{ $sesi->mentor->getImage ?? 'https://via.placeholder.com/150' }}" alt="{{ $sesi->mentor->name ?? '-' }}" class="rounded-circle mr-2" width="30" height="30">
+                                {{-- name --}}
+                                <p class="mt-1">
+                                   {{ $sesi->mentor->name ?? '-' }}
+                                </p>
+                             </div>
+                            <p class="card-text">{{ $sesi->description }}</p>
+                            <div class="row mb-3">
+                                <div class="col-4">
+                                    <small class="">
+                                        <i class="mdi mdi-calendar-clock"></i> {{ $sesi->date }}
+                                    </small>
+                                </div>
+                                <div class="col-4">
+                                    <small class="">
+                                        <i class="mdi mdi-clock"></i> {{ $sesi->start_time }} - {{ $sesi->end_time }}
+                                    </small>
+                                </div>
+                            </div>
+                            @if ($sesi->type == 'tugas')
+
+                            {{ $sesi->nilai->myTugas }}
+                            @if (@$sesi->myTugas)
+                                test
+                            @endif
+                            {{-- input tugas form --}}
+                            <form action="{{ route('user.tugas.store', ['sesi_id' => $sesi->id]) }}" method="POST">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Kirim Jawaban Tugas</label>
+                                    <div class="input-group col-xs-12">
+                                      <input type="text" class="form-control form-control-sm"  placeholder="Input link tugas disini">
+                                      <span class="input-group-append">
+                                        <button class="btn-sm btn btn-primary" type="button">Upload</button>
+                                      </span>
+                                    </div>
+                                </div>
+                            </form>
+
+                            @elseif ($sesi->type == 'materi')
+                                <a href="{{ $sesi->content }}" target="_blank" class="btn btn-sm btn-primary">Lihat Materi</a>
+                            @elseif ($sesi->type == 'video')
+                            {{-- button modal video --}}
+                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-video-{{ $sesi->id }}">Lihat Video</button>
+
+
+                            {{-- modal video --}}
+                            <div class="modal fade" id="modal-video-{{ $sesi->id }}" tabindex="-1" role="dialog" aria-labelledby="modal-video-{{ $sesi->id }}" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-dark" id="modal-video-{{ $sesi->id }}">{{ $sesi->name }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-12 mb-4 w-100">
+                                                    <div style="max-width: 100%" >
+                                                      {!! $sesi->content !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @empty
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p class=" mb-0">Mohon maaf, sesi belum tersedia </p>
+                </div>
+            </div>
+            @endforelse
 
             {{-- card survey --}}
             {{-- <h4 class="card-title">Survey</h4> --}}
-            @if ($event->date .' '. $event->end_time  <= date('Y-m-d H:i'))
+            @if ($event->end_date .' '. $event->end_time  <= date('Y-m-d H:i'))
             @forelse ($surveys as $survey)
             <div class="card mb-2">
                 <div class="card-body">

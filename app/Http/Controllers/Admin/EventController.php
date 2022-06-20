@@ -46,6 +46,7 @@ class EventController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'date' => 'required|date',
+            'end_date' => 'required|date',
             'start_time' => 'required',
             'end_time' => 'required',
             'location' => 'required|string|max:255',
@@ -74,9 +75,16 @@ class EventController extends Controller
      */
     public function show($id)
     {
+        $event = Event::withCount(['sesi'])->findOrFail($id);
+        $sesis = $event->sesi()->paginate(10); 
+        return view('admin.events.show', compact('event', 'sesis'));
+    }
+
+    public function peserta($id)
+    {
         $event = Event::withCount(['users'])->findOrFail($id);
         $users = $event->users()->latest()->paginate(10);
-        return view('admin.events.show', compact('event', 'users'));
+        return view('admin.events.peserta', compact('event', 'users'));
     }
 
     /**
@@ -106,6 +114,7 @@ class EventController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'date' => 'required|date',
+            'end_date' => 'required|date',
             'start_time' => 'required',
             'end_time' => 'required',
             'location' => 'required|string|max:255',
@@ -149,7 +158,9 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
         $surveys = $event->surveys;
         // ->with('survey_user.answers')->get();
-        $survey_user = $surveys->load('survey_user');
+        $survey_user = $surveys->load(['survey_user' => function($query) use ($event) {
+            $query->where('survey_users.event_id', $event->id);
+        }]);
         // get all id survey_user
         $survey_user_id = $survey_user->pluck('id')->toArray();
         // return response()->json($survey_user);
