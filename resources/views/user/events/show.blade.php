@@ -13,7 +13,25 @@
         </div>
     </div>
     <div class="row">
+        
         <div class="col-lg-6 mb-md-4">
+            @if (@$event_user->certificate && $event_user->certificate->status == 'approved')
+                <div class="card mb-3 shadow">
+                  <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h4 class="card-title mb-0">Selamat !</h4>
+                            <p class="card-text">Sertifikat anda telah tersedia</p>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ route('certificates.show', $event_user->certificate->id) }}" class="btn btn-inverse-success btn-sm" target="_blank">
+                                <i class="mdi mdi-certificate mr-2"></i>Unduh Sertifikat
+                             </a>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            @endif
             <div class="card">
                 <div class="card-body">
                     <img src="{{ asset($event->image) }}" alt="{{ $event->name }}" class="img-fluid w-100 mb-3 rounded">

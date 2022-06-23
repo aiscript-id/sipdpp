@@ -50,9 +50,9 @@ class Sesi extends Model
         return $this->hasMany(Nilai::class, 'sesi_id', 'id');
     }
 
-    public function MyTugas()
+    public function MyTugas($user_id = null)
     {
-        $tugas = $this->nilai()->where('user_id', auth()->user()->id);
+        $tugas = $this->nilai()->where('user_id', $user_id ?? auth()->user()->id);
         return $tugas->count() == 0 ? null : $tugas->first();
         // return $tugas;
     }

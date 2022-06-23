@@ -177,6 +177,8 @@ return [
 
         Laravolt\Indonesia\ServiceProvider::class,
 
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
+
     ],
 
     /*
@@ -235,6 +237,7 @@ return [
         // New
         'Indonesia' => Laravolt\Indonesia\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class
 
     ],
 

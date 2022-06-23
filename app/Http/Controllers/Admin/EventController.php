@@ -83,7 +83,7 @@ class EventController extends Controller
     public function peserta($id)
     {
         $event = Event::withCount(['users'])->findOrFail($id);
-        $users = $event->users()->latest()->paginate(10);
+        $users = $event->event_users()->latest()->paginate(10);
         return view('admin.events.peserta', compact('event', 'users'));
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\EventUser;
 use App\Models\Sesi;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -53,10 +54,11 @@ class EventController extends Controller
     public function show($slug)
     {
         $event = Event::where('slug', $slug)->firstOrFail();
+        $event_user = EventUser::where('event_id', $event->id)->where('user_id', auth()->user()->id)->firstOrFail();
         $surveys = $event->surveys()->published()->get()->loadCount('fields');
         $sesis = $event->sesi;
         // return response()->json($surveys);
-        return view('user.events.show', compact('event', 'surveys', 'sesis'));
+        return view('user.events.show', compact('event', 'surveys', 'sesis', 'event_user'));
     }
 
     /**

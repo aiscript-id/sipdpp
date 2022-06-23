@@ -37,6 +37,11 @@ class Event extends Model
         return $start . ' - ' . $end;
     }
 
+    public function event_users()
+    {
+        return $this->hasMany(EventUser::class);
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class);

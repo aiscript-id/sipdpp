@@ -75,7 +75,9 @@ Route::middleware('role:superadmin|admin')->prefix('admin')->group(function() {
 
     Route::resource('mentors', MentorController::class)->only(['index', 'store', 'update', 'destroy']);
 
-    Route::resource('certificates', CertificateController::class)->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('certificates', CertificateController::class)->only(['index', 'update', 'destroy']);
+    Route::get('events/certificates/store', [CertificateController::class, 'store'])->name('events.certificates.store');
+    Route::get('events/certificates/show/{id}', [CertificateController::class, 'show'])->name('events.certificates.show');
 
     // survey change
     Route::get('survey/insert-field', [AdminSurveyController::class, 'insertField']);
@@ -100,6 +102,8 @@ Route::middleware('role:user')->prefix('user')->group(function() {
     Route::put('events/{survey_user}/update', [SurveyController::class, 'update'])->name('user.surveys.update');
 
     Route::post('/events/tugas/store', [EventController::class, 'storeTugas'])->name('user.tugas.store');
+    Route::get('certificates/show/{id}', [CertificateController::class, 'show'])->name('certificates.show');
+
 });
 
 

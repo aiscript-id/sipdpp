@@ -27,7 +27,7 @@
               <span class="menu-title">Event</span>
             </a>
           </li>
-          <li class="nav-item {{ Request::routeIs('user.surveys*') ? 'active' : '' }}">
+          <li class="nav-item d-none {{ Request::routeIs('user.surveys*') ? 'active' : '' }}">
             <a class="nav-link" href="#" >
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Survey</span>

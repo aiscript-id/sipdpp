@@ -22,6 +22,7 @@
                      <th>Nama</th>
                      <th>Tugas</th>
                      <th>Nilai</th>
+                     <th>Tanggal dibuat</th>
                      <th>Aksi</th>
                   </tr>
                </thead>
@@ -34,8 +35,13 @@
                      <td class="py-1">
                         {{ $nilai->user->name }}
                      </td>
-                     <td>{{ $nilai->test }}</td>
+                     <td>
+                        <a name="" id="" class="btn btn-sm btn-warning" target="_blank" href="{{ $nilai->test }}" role="button">
+                           Lihat Hasil Jawaban
+                        </a>
+                     </td>
                      <td>{{ $nilai->nilai ?? 0 }}</td>
+                     <td>{{ $nilai->created_at }}</td>
                      <td>
                         {{-- modal edit --}}
                         <button type="button" class="btn btn-inverse-primary btn-sm" data-toggle="modal" data-target="#editModal{{ $nilai->id }}">
@@ -77,8 +83,8 @@
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">Save changes</button>
+                  <button type="button" class="btn btn-sm btn-inverse-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-sm btn-primary">Save changes</button>
                </div>
             </form>
          </div>
