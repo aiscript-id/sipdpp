@@ -12,7 +12,7 @@
                   </button>
                </a>
                {{-- button cetak --}}
-               <a href="#">
+               <a href="{{ route('print.events') }}" target="_blank">
                   <button class="btn btn-inverse-primary btn-sm">
                      <i class="mdi mdi-printer"></i>
                      Cetak

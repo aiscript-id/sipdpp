@@ -5,6 +5,13 @@
       <div class="card-body">
          <div class="d-flex justify-content-between">
             <h4 class="card-title">Peserta</h4>
+            {{-- print --}}
+            <a href="{{ route('print.event', $event->id) }}" target="_blank">
+               <button class="btn btn-inverse-primary btn-sm">
+                  <i class="mdi mdi-printer"></i>
+                  Cetak
+               </button>
+            </a>
          </div>
          <small><b>catatan :</b> klik nama tugas untuk mengisi nilai peserta pada tugas yang dipilih</small>
          @if ($event->users_count > 0)

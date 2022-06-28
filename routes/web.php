@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PrintController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WilayahController;
@@ -81,6 +82,12 @@ Route::middleware('role:superadmin|admin')->prefix('admin')->group(function() {
 
     // survey change
     Route::get('survey/insert-field', [AdminSurveyController::class, 'insertField']);
+
+    // print
+    Route::prefix('print')->group(function(){
+        Route::get('events', [PrintController::class, 'events'])->name('print.events');
+        Route::get('event/{event}', [PrintController::class, 'event'])->name('print.event');
+    });
 });
 
 Route::middleware('role:user')->prefix('user')->group(function() {
