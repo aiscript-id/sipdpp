@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="{{ asset('skydash/css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}" />
-
     {{-- toastr --}}
     <style>
         .sidebar .nav .nav-item.active > .nav-link {
