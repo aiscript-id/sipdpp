@@ -28,6 +28,8 @@ class PrintController extends Controller
             'event' => $event,
             'users' => $event->event_users,
         ];
+
+        // return response()->json($event->event_users);
         
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadView('print.event', $data)->setPaper('a4', 'landscape')->save('event-'.$event->slug.'.pdf');

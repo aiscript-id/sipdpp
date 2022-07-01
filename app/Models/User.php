@@ -71,5 +71,14 @@ class User extends Authenticatable
         return $this->belongsToMany(Event::class);
     }
 
+    // village
+
+    public function getCityAttribute()
+    {
+        $data = \Indonesia::findVillage($this->desa_id, $with = ['district.city']);
+        // array $with : ['province', 'city', 'district', 'district.city', 'district.city.province']
+        return $data->district->city->name;
+    }
+
 
 }

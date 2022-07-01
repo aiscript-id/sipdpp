@@ -16,14 +16,14 @@
 </style>
 <body style="background-image: url('{{ $image }}')">
     <div class="text-center p-5 mt-4">
-        <h1>Sertifikat</h1>
-        <h3>{{ $event->name }}</h3>
-        <p class="text-muted mb-3" style="font-size: 9pt">No. Sertifikat : {{ $certificate->no_certificate }}</p>
-        <p class="mt-5">diberikan kepada</p>
+        {{-- <h1>Sertifikat</h1> --}}
+        {{-- <h3>{{ $event->name }}</h3> --}}
+        <p class="text-white mb-3" style="font-size: 9pt; margin-top:155px;">No. Sertifikat : {{ $certificate->no_certificate }}</p>
+        {{-- <p class="mt-5">diberikan kepada</p> --}}
 
-        <h4 class="underline my-3">{{ $user->name }}</h4>
-        <p>
-            Atas partisipasinya pada event {{ $event->name }} yang dilaksanakan pada tanggal <br>
+        <p class="underline font-weight-bold" style="margin-top: 85px; font-size:20pt">{{ $user->name }}</p>
+        <p style="font-size: 10pt;margin-top:80px">
+            Atas partisipasinya pada event <b>{{ $event->name }}</b> yang dilaksanakan pada tanggal <br>
             {{ dateIndonesia($event->date) }}
             @if (@$event->end_date && $event->end_date != $event->date)
                 - {{ dateIndonesia($event->end_date) }}

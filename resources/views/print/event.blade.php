@@ -20,16 +20,19 @@
                     <th scope="col">#</th>
                     <th scope="col">Nama</th>
                     <th scope="col">Tanggal</th>
-                    <th scope="col">Lokasi</th>
+                    <th scope="col">Instansi</th>
+                    <th scope="col">Kota</th>
                 </tr>
+
             </thead>
             <tbody>
                 @foreach ($users as $user)    
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td>{{ $user->user->name }}</td>
-                    <td>{{ $user->date }}</td>
-                    <td>{{ $user->location }}</td>
+                    <td>{{ $user->created_at }}</td>
+                    <td>{{ $user->user->institute ?? '-' }}</td>
+                    <td>{{ $user->user->city }}</td>
                 </tr>
                 @endforeach
             </tbody>

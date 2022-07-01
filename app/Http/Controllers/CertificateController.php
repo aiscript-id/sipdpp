@@ -86,7 +86,7 @@ class CertificateController extends Controller
             'event' => $event,
             'user' => $event_user->user,
             'certificate' => $certificate,
-            'image' => public_path() . '/assets/background/certificate-01.jpg',
+            'image' => public_path() . '/assets/background/certificate-02.jpg',
             'qrcode' => '',
         ];
         $pdf = \App::make('dompdf.wrapper');
