@@ -6,6 +6,7 @@ use App\Models\Certificate;
 use App\Models\EventUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class CertificateController extends Controller
 {
@@ -16,7 +17,9 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        //
+        
+        $certificates = Certificate::latest()->where('user_id', Auth::user()->id)->where('status', 'approved')->get();
+        return view('user.certificate', compact('certificates'));
     }
 
     /**

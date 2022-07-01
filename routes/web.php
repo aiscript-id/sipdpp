@@ -111,6 +111,8 @@ Route::middleware('role:user')->prefix('user')->group(function() {
     Route::post('/events/tugas/store', [EventController::class, 'storeTugas'])->name('user.tugas.store');
     Route::get('certificates/show/{id}', [CertificateController::class, 'show'])->name('certificates.show');
 
+    Route::get('certificate', [CertificateController::class, 'index'])->name('user.certificates');
+
 });
 
 
