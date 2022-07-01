@@ -36,11 +36,11 @@
                     Keep me signed in
                 </label>
             </div>
-            @if (Route::has('password.request'))
+            {{-- @if (Route::has('password.request'))
                 <a class="auth-link text-black" href="{{ route('password.request') }}">
                     {{ __('Forgot Your Password?') }}
                 </a>
-            @endif
+            @endif --}}
         </div>
         <div class="text-center mt-2 font-weight-light">
             <button type="submit" class="btn btn-success btn-block">

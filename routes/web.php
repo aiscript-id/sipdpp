@@ -82,6 +82,7 @@ Route::middleware('role:superadmin|admin')->prefix('admin')->group(function() {
 
     // survey change
     Route::get('survey/insert-field', [AdminSurveyController::class, 'insertField']);
+    Route::get('event/{event}/peserta-survey', [AdminEventController::class, 'EventPesertaSurvey'])->name('events.user-survey');
 
     // print
     Route::prefix('print')->group(function(){

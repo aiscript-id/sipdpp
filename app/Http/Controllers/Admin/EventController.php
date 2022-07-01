@@ -236,4 +236,15 @@ class EventController extends Controller
         toastr()->success('Survey deleted successfully');
         return redirect()->route('events.surveys', $event->id);
     }
+
+    // eventPesertaSurvey
+    public function eventPesertaSurvey($id)
+    {
+        $event = Event::findOrFail($id);
+        $surveys = $event->surveys->load('survey_user.user');
+        // return response()->json($surveys);
+
+        return view('admin.events.peserta-survey', compact('event', 'surveys'));
+
+    }
 }

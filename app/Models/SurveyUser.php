@@ -21,4 +21,9 @@ class SurveyUser extends Model
         return $this->belongsTo(EventSurvey::class, 'event_survey_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

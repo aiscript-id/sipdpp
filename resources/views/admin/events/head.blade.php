@@ -49,6 +49,10 @@
                 class="btn btn-sm btn-{{ Request::routeIs('events.surveys*') ? '' : 'inverse-' }}primary" title="Survey">
                 <i class="mdi mdi-clipboard-text"></i> Survey
             </a>
+            <a href="{{ route('events.user-survey', $event->id) }}" 
+               class="btn btn-sm btn-{{ Request::routeIs('events.user-survey') ? '' : 'inverse-' }}primary" title="Survey">
+               <i class="mdi mdi-account"></i> Peserta Survey
+           </a>
          </div>
       </div>
    </div>
