@@ -21,7 +21,9 @@
                      <tr>
                         <th rowspan="2">Nama</th>
                         <th rowspan="2">Email</th>
+                        @if ($event->sesi()->where('type', 'tugas')->count() > 0)
                         <th class="text-center" colspan="{{ $event->sesi()->where('type', 'tugas')->count() }}">Tugas</th>
+                        @endif
                         <th rowspan="2">Sertifikat</th>
                         <th rowspan="2">Aksi</th>
                      </tr>
