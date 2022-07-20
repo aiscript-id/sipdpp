@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\MyHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\EventUser;
 use App\Models\Survey;
 use App\Models\SurveyField;
 use Illuminate\Http\Request;
@@ -51,6 +52,7 @@ class EventController extends Controller
             'end_time' => 'required',
             'location' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'limit' => 'nullable|integer',
         ]);
 
         $attr['slug'] = \Str::slug($attr['name']);
@@ -119,6 +121,7 @@ class EventController extends Controller
             'end_time' => 'required',
             'location' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+            'limit' => 'nullable|integer',
         ]);
 
         $attr['slug'] = \Str::slug($attr['name']);
@@ -246,5 +249,14 @@ class EventController extends Controller
 
         return view('admin.events.peserta-survey', compact('event', 'surveys'));
 
+    }
+
+    public function deleteUser($id)
+    {
+        $user = EventUser::findOrFail($id);
+        $user->delete();
+
+        toastr()->success('User Event deleted successfully');
+        return redirect()->route('events.peserta', $user->event_id);
     }
 }

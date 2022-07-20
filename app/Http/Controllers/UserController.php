@@ -99,4 +99,11 @@ class UserController extends Controller
         $jobs = ['1' => 'Pelajar', '2' => 'Mahasiswa', '3' => 'Pensiunan', '4' => 'Pegawai Negeri', '5' => 'Pegawai Swasta', '6' => 'Wiraswasta', '7' => 'Lainnya'];
         return $jobs;
     }
+
+    public function bantuan()
+    {
+        return view('user.bantuan');
+    }
+
+
 }

@@ -69,6 +69,16 @@
                         @enderror
                     </div>
                 </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="limit">Limit Peserta</label>
+                        <input type="number" name="limit" class="form-control" min="0" value="{{ $event->limit }}" />
+                        @error('limit')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
                 
                 <div class="col-md-4">
                     <div class="form-group">

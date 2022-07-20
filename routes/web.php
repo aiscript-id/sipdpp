@@ -48,6 +48,7 @@ Route::middleware('role:superadmin|admin')->prefix('admin')->group(function() {
     Route::delete('events/survey/destroy', [AdminEventController::class, 'surveyDestroy'])->name('events.surveys.destroy');
 
     Route::get('events/{event}/peserta', [AdminEventController::class, 'peserta'])->name('events.peserta');
+    Route::delete('events/users/delete/{id}', [AdminEventController::class, 'deleteUser'])->name('events.users.delete');
 
     // events.surveys.fields.show
     Route::get('events/{event}/survey/field/{field}', [AdminEventController::class, 'surveyField'])->name('events.surveys.fields');
@@ -93,6 +94,7 @@ Route::middleware('role:superadmin|admin')->prefix('admin')->group(function() {
 
 Route::middleware('role:user')->prefix('user')->group(function() {
     Route::get('/dashboard', [UserController::class, 'index'])->name('user');
+    Route::get('/bantuan', [UserController::class, 'bantuan'])->name('user.bantuan');
 
     // lengkapi profile
     Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');

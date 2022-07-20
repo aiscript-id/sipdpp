@@ -47,6 +47,14 @@
               <span class="menu-title">Profile</span>
             </a>
           </li>
+
+          <li class="nav-item {{ Request::routeIs('user.bantuan') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('user.bantuan') }}" >
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Bantuan</span>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- partial -->

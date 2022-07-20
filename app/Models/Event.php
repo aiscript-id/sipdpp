@@ -15,11 +15,13 @@ class Event extends Model
         'slug',
         'description',
         'date',
+        'end_date',
         'start_time',
         'end_time',
         'location',
         'publish',
-        'image'
+        'image',
+        'limit'
     ];
 
     public function getGetDateAttribute()

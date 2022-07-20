@@ -98,6 +98,11 @@ class EventController extends Controller
     public function join($slug)
     {
         $event = Event::where('slug', $slug)->firstOrFail();
+        // check if limit
+        if($event->limit > 0 && $event->users()->count() >= $event->limit) {
+            toastr()->error('Event is full.');
+            return redirect()->route('user');
+        }
         // check if user already joined
         if ($event->users()->where('user_id', auth()->id())->exists()) {
             toastr()->error('You already joined this event');

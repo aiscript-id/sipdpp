@@ -30,6 +30,7 @@
                      <th>Publish</th>
                      <th>Nama</th>
                      <th>Peserta</th>
+                     <th>Limit</th>
                      <th>Tanggal</th>
                      <th>Lokasi</th>
                      <th>Aksi</th>
@@ -52,7 +53,8 @@
                            {{ $event->name }}
                         </a>
                      </td>
-                     <td>{{ $event->users_count ?? 0 }}</td>
+                     <td><b>{{ $event->users_count ?? 0 }}</b></td>
+                     <td>{{ ($event->limit != 0) ? $event->limit : '-'}}</td>
                      <td>{{ $event->getDate }}</td>
                      <td>{{ $event->location ?? '-' }}</td>
                      <td>

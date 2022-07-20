@@ -77,6 +77,14 @@
                            <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-inverse-warning">
                               <i class="mdi mdi-eye"></i>
                            </a>
+                           {{-- delete peserta --}}
+                           <form action="{{ route('events.users.delete', $user->id) }}" method="POST" class="d-inline show_confirm">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-sm btn-inverse-danger">
+                                 <i class="mdi mdi-delete"></i>
+                              </button>
+                           </form>
                         </td>
                      </tr>
                      @endforeach
